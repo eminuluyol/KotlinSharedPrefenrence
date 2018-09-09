@@ -87,11 +87,14 @@ class CollapsibleCard @JvmOverloads constructor(
   }
 
   override fun onRestoreInstanceState(state: Parcelable?) {
-    val customState = (state as SavedState)
-    if (expanded != customState.expanded) {
-      toggleExpanded()
+    if (state is SavedState) {
+      if (expanded != state.expanded) {
+        toggleExpanded()
+      }
+      super.onRestoreInstanceState(state.superState)
+    } else {
+      super.onRestoreInstanceState(state)
     }
-    super.onRestoreInstanceState(customState.superState)
   }
 }
 
