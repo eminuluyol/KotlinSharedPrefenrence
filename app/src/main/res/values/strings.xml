@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">KotlinSharedPrefenrence</string>
+  <string name="expanded" translation_description="The label used on a button when a view is in an expanded state.">Expanded</string>
+  <string name="collapsed" translation_description="The label used on a button when a view is in an collapsed state.">Collapsed</string>
+</resources>
