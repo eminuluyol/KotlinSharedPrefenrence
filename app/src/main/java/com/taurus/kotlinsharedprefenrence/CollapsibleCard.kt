@@ -87,40 +87,37 @@ class CollapsibleCard @JvmOverloads constructor(
   }
 
   override fun onRestoreInstanceState(state: Parcelable?) {
-    if (state is SavedState) {
-      if (expanded != state.expanded) {
-        toggleExpanded()
-      }
-      super.onRestoreInstanceState(state.superState)
-    } else {
-      super.onRestoreInstanceState(state)
+    val customState = (state as SavedState)
+    if (expanded != customState.expanded) {
+      toggleExpanded()
     }
+    super.onRestoreInstanceState(customState.superState)
+  }
+}
+
+internal class SavedState : View.BaseSavedState {
+  var expanded = false
+
+  constructor(source: Parcel) : super(source) {
+    expanded = source.readByte().toInt() != 0
   }
 
-  internal class SavedState : View.BaseSavedState {
-    var expanded = false
+  constructor(superState: Parcelable) : super(superState)
 
-    constructor(source: Parcel) : super(source) {
-      expanded = source.readByte().toInt() != 0
-    }
+  override fun writeToParcel(out: Parcel, flags: Int) {
+    super.writeToParcel(out, flags)
+    out.writeByte((if (expanded) 1 else 0).toByte())
+  }
 
-    constructor(superState: Parcelable) : super(superState)
+  companion object {
+    @JvmField
+    val CREATOR = object : Parcelable.Creator<SavedState> {
+      override fun createFromParcel(source: Parcel): SavedState {
+        return SavedState(source)
+      }
 
-    override fun writeToParcel(out: Parcel, flags: Int) {
-      super.writeToParcel(out, flags)
-      out.writeByte((if (expanded) 1 else 0).toByte())
-    }
-
-    companion object {
-      @JvmField
-      val CREATOR = object : Parcelable.Creator<SavedState> {
-        override fun createFromParcel(source: Parcel): SavedState {
-          return SavedState(source)
-        }
-
-        override fun newArray(size: Int): Array<SavedState?> {
-          return arrayOfNulls(size)
-        }
+      override fun newArray(size: Int): Array<SavedState?> {
+        return arrayOfNulls(size)
       }
     }
   }

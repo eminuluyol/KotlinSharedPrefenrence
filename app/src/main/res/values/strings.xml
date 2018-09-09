@@ -2,4 +2,5 @@
   <string name="app_name">KotlinSharedPrefenrence</string>
   <string name="expanded" translation_description="The label used on a button when a view is in an expanded state.">Expanded</string>
   <string name="collapsed" translation_description="The label used on a button when a view is in an collapsed state.">Collapsed</string>
+  <string name="dummy_content">I am very enthuasistic about mobile technologies and always try to improve my knowledge. I find myself pretty lucky since I have a job which I do with joy and get more excited with every new thing I learn. What many people find good about me is that, I am always ready to share all my knowledge with people instead of keeping it for myself.</string>
 </resources>
